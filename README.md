@@ -1,1 +1,1 @@
-# leet ^(and other toy problems)
+# leet <sup>(and other toy problems)</sup>
