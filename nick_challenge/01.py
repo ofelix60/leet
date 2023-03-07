@@ -3,6 +3,13 @@
 # could extend it in a second part and only include directories
 
 import os
+from pathlib import Path
+
+# root_dir = Path("/Users/oscar/Desktop/foo/content")
+
+# d = [f"{dir.name} - {dir.stat().st_size / 1000:.1f}KB" for dir in root_dir.iterdir() if dir.is_dir()]
+# f = [f"{file.name} - {file.stat().st_size / 1000:.1f}KB" for file in root_dir.iterdir() if file.is_file()]
+
 
 d = []
 f = []
@@ -18,7 +25,6 @@ for path, dirs, files in os.walk("/Users/oscar/Desktop/foo/content"):
         file_path = os.path.join("/Users/oscar/Desktop/foo/content", file)
         if os.path.exists(file_path):
             f.append((f"{file} - {os.stat(file_path).st_size}KB"))
-            # print((f"{file} - {os.stat(dir_name).st_size}KB"))
     break
 
 print("directories: ", d)
