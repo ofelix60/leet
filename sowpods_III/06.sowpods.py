@@ -6,7 +6,8 @@
 with open("sowpods.txt", "r") as f:
     words = [line.rstrip() for line in f]
 
-pattern = [
+
+alphabet = [
     "A",
     "B",
     "C",
@@ -39,49 +40,61 @@ pattern = [
 result = []
 
 # for word in words:
-#     pattern = ["A", "B", "C", "D", "E", "F"]
+#     alphabet = ["A", "B", "C", "D", "E", "F"]
 #     if len(word) >= 6:
 #         for letter in word:
-#             if len(pattern) > 0 and letter in pattern:
-#                 pattern.remove(letter)
-#         if len(pattern) == 0:
+#             if len(alphabet) > 0 and letter in alphabet:
+#                 alphabet.remove(letter)
+#         if len(alphabet) == 0:
 #             result.append(word)
 
 # print(result)
 
 
-result2 = []
-pattern2 = pattern
+def contains_all_letters(word, letters, cache):
+    key = (word, "".join(sorted(letters)))
+    if key in cache:
+        return cache[key]
+    if len(word) < len(letters):
+        cache[key] = False
+        return False
+    for letter in letters:
+        if letter not in word:
+            cache[key] = False
+            return False
+    cache[key] = True
+    return True
 
-# print("letter:", pattern[(len(pattern) - 1) - i])
-# print("number:", len(pattern) - i)
-# print()
 
-for i in range(len(pattern) - 1):
-    # print(pattern[i])
-    for word in words:
-        x = False
-        if len(word) >= len(pattern):
-            for letter in word:
-                if letter not in pattern:
-                    break
-        print(len(pattern))
-        x = True
-        if x == True:
-            # result = pattern
-            print("here:", pattern)
+def has_word_using_all_letters(letters, words_array, cache):
+    key = ("".join(sorted(letters)), tuple(words_array))
+    if key in cache:
+        return cache[key]
+    for word in words_array:
+        if contains_all_letters(word, letters, cache):
+            cache[key] = True
+            return True
+    cache[key] = False
+    return False
+
+
+def get_subarray(array, start_index, length):
+    return array[start_index : start_index + length]
+
+
+def find_longest_letter_chain(alphabet, words):
+    cache = {}
+    start_index = 0
+    length = 1
+    longest_chain = None
+    while start_index + length <= len(alphabet):
+        if not has_word_using_all_letters(get_subarray(alphabet, start_index, length), words, cache):
+            start_index += 1
         else:
-            pattern.pop(len(pattern) - 1)
+            longest_chain = get_subarray(alphabet, start_index, length)
+            start_index = 0
+            length += 1
+    return longest_chain
 
-# loop through alphabet
-# loop through words
-#   if no: word contains all letters remove last letter from pattern
-#   if yes: result IS pattern and return pattern
 
-# for i in range(len(pattern) - 1):
-#     print(pattern)
-#     pattern.pop(len(pattern) - 1)
-#     print(pattern)
-#     print()
-
-# print(result2)
+print(find_longest_letter_chain(alphabet, words))
