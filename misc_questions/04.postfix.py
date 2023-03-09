@@ -23,3 +23,24 @@
 # Here’s how the stack evolves while evaluating this expression:
 
 # ** see dropbox tables
+
+
+def postfix(operand):
+    stack = []
+
+    for i in range(len(operand)):
+        # print(operand)
+
+        if operand[i] in "1234567890":
+            stack.append(operand[i])
+        else:
+            two = stack.pop()
+            one = stack.pop()
+            expr = one + operand[i] + two
+            stack.append(str(int(eval(expr))))
+
+    return stack[0]
+
+
+print(postfix("134*+2-"))
+print(postfix("321++2/"))
