@@ -49,22 +49,6 @@ def rot(str, shift):
     return encoded
 
 
-# print(rot("abc", 1))
-# print(rot("ThIs, Is A tEsT!", 1))
-# print(rot(rot("Hello, Rick", 1), -1))
-
-# print("FORMAT" in words)
-# print("theasdf" in words)
-
-# for word in split_str:
-#     for i in range(1, 26):
-#         this_word = rot(word, i).upper()
-#         print(this_word, i)
-#         if this_word in words:
-
-
-# return 26 - i
-
 print(
     rot(
         "NyQuil tm. Severe cold & flu. Headache, fever, sore throat, minor aches & pains. Sneezing, Runny Nose, Cough.",
@@ -89,11 +73,10 @@ def decrypt(str):
     return tuple(result)
 
 
-# print(decrypt("Ju xbt uif cftu pg ujnft, ju xbt uif xpstu pg ujnft"))
 print(
     decrypt(
         rot(
-            "Severe cold  flu Headache fever sore throat minor aches  pains Sneezing Runny Nose Cough",
+            "Severe cold  flu Headache fever sore throat minor aches pains Sneezing Runny Nose Cough",
             7,
         )
     )
