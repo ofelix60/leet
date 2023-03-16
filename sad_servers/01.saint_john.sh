@@ -12,6 +12,13 @@
 
 # OS: Ubuntu 22.04 LTS
 
+# delete only
 sudo rm /var/log/bad.log
 cd /var/log/
 ls
+
+# find and stop process
+sudo lsof -n | grep bad.log
+kill 528
+# confirm
+sudo lsof -n | grep bad.log
