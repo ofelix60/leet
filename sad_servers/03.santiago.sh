@@ -14,3 +14,29 @@
 
 # Time to Solve: 15 minutes.
 
+#!/bin/bash
+
+global_count=0
+number=null
+
+for file in /home/admin/*.txt; do
+        file_count=$(grep "Alice" "$file" | wc -l)
+        global_count=$((global_count + file_count))
+        if [ $file_count -eq 1 ]; then
+            number=$(grep Alice -A 1 "$file" | grep -Eo '[0-9]+')
+        fi
+done
+
+echo -n $global_count > /home/admin/solution; echo $number >> /home/admin/solution
+
+echo $global_count
+echo $number
+
+md5sum /home/admin/solution
+
+
+# or
+
+global_count=$(cat *.txt | grep -c Alice)
+onefile=$(grep -c Alice *.txt | grep ':1$' | cut -d: -f1)
+number=$(grep -A1 Alice $onefile | tail -1 | grep -Eo '[0-9]+') (edited) 
